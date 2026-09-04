@@ -1,0 +1,1344 @@
+/* ========================================
+   COMIC BOOK / POP-ART PERSONAL SITE
+   ======================================== */
+
+/* --- RESET & BASE --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --yellow: #FFE600;
+    --red: #FF2D55;
+    --blue: #007AFF;
+    --black: #1a1a1a;
+    --white: #FAFAFA;
+    --orange: #FF9500;
+    --green: #34C759;
+    --purple: #AF52DE;
+    --border: 4px solid var(--black);
+    --shadow: 6px 6px 0 var(--black);
+    --shadow-sm: 3px 3px 0 var(--black);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Comic Neue', cursive, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* --- HALFTONE PATTERN --- */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--yellow);
+    overflow: hidden;
+}
+
+.halftone-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--black) 1px, transparent 1px);
+    background-size: 12px 12px;
+    opacity: 0.06;
+    pointer-events: none;
+}
+
+/* ========================================
+   SCATTERED DOODLE DECORATIONS (hero)
+   ======================================== */
+.doodle {
+    position: absolute;
+    font-size: 2rem;
+    color: var(--black);
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 1;
+    user-select: none;
+}
+
+.doodle-star-1 {
+    top: 10%;
+    right: 15%;
+    font-size: 3rem;
+    color: var(--red);
+    opacity: 0.3;
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+.doodle-star-2 {
+    bottom: 25%;
+    left: 8%;
+    font-size: 2.5rem;
+    color: var(--blue);
+    opacity: 0.25;
+    animation: twinkle 2.5s ease-in-out 0.5s infinite;
+}
+
+.doodle-zigzag {
+    top: 35%;
+    left: 3%;
+    font-size: 2.5rem;
+    transform: rotate(-30deg);
+    opacity: 0.15;
+}
+
+.doodle-squiggle {
+    bottom: 30%;
+    right: 5%;
+    font-size: 3rem;
+    transform: rotate(20deg);
+    opacity: 0.15;
+}
+
+.doodle-circle {
+    top: 20%;
+    left: 20%;
+    font-size: 4rem;
+    color: var(--green);
+    opacity: 0.1;
+}
+
+.doodle-x {
+    bottom: 15%;
+    right: 20%;
+    font-size: 2rem;
+    color: var(--red);
+    opacity: 0.15;
+    transform: rotate(15deg);
+}
+
+.doodle-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0.2;
+}
+
+.dot-1 { top: 15%; left: 35%; background: var(--red); }
+.dot-2 { top: 70%; left: 12%; background: var(--blue); }
+.dot-3 { top: 25%; right: 25%; background: var(--green); width: 8px; height: 8px; }
+.dot-4 { bottom: 20%; left: 30%; background: var(--orange); width: 16px; height: 16px; }
+.dot-5 { top: 45%; right: 10%; background: var(--purple); width: 10px; height: 10px; }
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2) rotate(15deg); }
+}
+
+/* --- ACTION WORDS (decorative) --- */
+.action-word {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--red);
+    text-shadow: 3px 3px 0 var(--black);
+    -webkit-text-stroke: 1px var(--black);
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    user-select: none;
+}
+
+.pow {
+    top: 8%;
+    left: 5%;
+    transform: rotate(-12deg);
+    animation: wobble 3s ease-in-out infinite;
+}
+
+.zap {
+    top: 12%;
+    right: 6%;
+    transform: rotate(8deg);
+    color: var(--blue);
+    animation: wobble 3.5s ease-in-out 0.5s infinite;
+}
+
+.wow {
+    bottom: 18%;
+    right: 10%;
+    transform: rotate(-5deg);
+    color: var(--orange);
+    animation: wobble 4s ease-in-out 1s infinite;
+}
+
+.boom {
+    bottom: 15%;
+    left: 8%;
+    transform: rotate(6deg);
+    color: var(--green);
+    animation: wobble 3.2s ease-in-out 1.5s infinite;
+}
+
+@keyframes wobble {
+    0%, 100% { transform: rotate(-12deg) scale(1); }
+    50% { transform: rotate(-8deg) scale(1.05); }
+}
+
+/* --- HERO CONTENT --- */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* --- CSS AVATAR --- */
+.avatar {
+    margin: 0 auto 2rem;
+    width: 160px;
+    height: 180px;
+    position: relative;
+}
+
+.clickable-avatar {
+    cursor: pointer;
+}
+
+.clickable-avatar:hover .avatar-head {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+
+.avatar-label {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Comic Neue', cursive;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--red);
+    background: var(--white);
+    border: 2px solid var(--black);
+    border-radius: 10px;
+    padding: 2px 8px;
+    white-space: nowrap;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.08); }
+}
+
+.avatar-head {
+    width: 130px;
+    height: 130px;
+    background: var(--orange);
+    border: var(--border);
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+}
+
+.eye {
+    width: 16px;
+    height: 20px;
+    background: var(--black);
+    border-radius: 50%;
+    position: absolute;
+    top: 44px;
+}
+
+.left-eye { left: 32px; }
+.right-eye { right: 32px; }
+
+.eye::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}
+
+/* eyebrows */
+.eyebrow {
+    position: absolute;
+    width: 20px;
+    height: 4px;
+    background: var(--black);
+    border-radius: 2px;
+    top: -10px;
+}
+
+.left-brow {
+    left: -2px;
+    transform: rotate(-5deg);
+}
+
+.right-brow {
+    right: -2px;
+    transform: rotate(5deg);
+}
+
+.mouth {
+    width: 36px;
+    height: 18px;
+    border: 3px solid var(--black);
+    border-top: none;
+    border-radius: 0 0 50% 50%;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s;
+}
+
+/* avatar happy state */
+.avatar-head.happy .mouth {
+    height: 22px;
+    width: 42px;
+}
+
+.avatar-head.happy .left-eye {
+    transform: scaleY(0.3);
+    top: 48px;
+}
+
+.avatar-head.happy .right-eye {
+    transform: scaleY(0.3);
+    top: 48px;
+}
+
+/* avatar surprised */
+.avatar-head.surprised .mouth {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid var(--black);
+    border-top: 3px solid var(--black);
+    bottom: 28px;
+}
+
+.avatar-head.surprised .left-eye,
+.avatar-head.surprised .right-eye {
+    transform: scale(1.3);
+}
+
+/* avatar sunglasses */
+.avatar-head.cool::after {
+    content: ' sunglasses';
+    position: absolute;
+    width: 80px;
+    height: 16px;
+    background: var(--black);
+    border-radius: 4px;
+    top: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0;
+}
+
+.headphones {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+}
+
+.hp-band {
+    width: 108px;
+    height: 26px;
+    border: 4px solid var(--black);
+    border-bottom: none;
+    border-radius: 60px 60px 0 0;
+    margin: 0 auto;
+}
+
+.hp-left, .hp-right {
+    width: 24px;
+    height: 30px;
+    background: var(--black);
+    border-radius: 4px;
+    position: absolute;
+    top: 14px;
+}
+
+.hp-left { left: 2px; }
+.hp-right { right: 2px; }
+
+/* --- HERO NAME --- */
+.hero-name {
+    font-family: 'Bangers', cursive;
+    line-height: 1;
+    letter-spacing: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.name-line {
+    display: block;
+    font-size: clamp(3rem, 12vw, 8rem);
+    -webkit-text-stroke: 3px var(--black);
+    color: var(--white);
+    text-shadow:
+        4px 4px 0 var(--black),
+        -1px -1px 0 var(--black),
+        1px -1px 0 var(--black),
+        -1px 1px 0 var(--black);
+    transform: rotate(-2deg);
+}
+
+.name-line:last-child {
+    transform: rotate(1deg);
+    color: var(--red);
+    -webkit-text-stroke: 3px var(--black);
+    text-shadow:
+        4px 4px 0 var(--black),
+        -1px -1px 0 var(--black),
+        1px -1px 0 var(--black),
+        -1px 1px 0 var(--black);
+}
+
+/* --- SPEECH BUBBLE --- */
+.speech-bubble {
+    background: var(--white);
+    border: var(--border);
+    border-radius: 30px;
+    padding: 1rem 2rem;
+    display: inline-block;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    transform: rotate(2deg);
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+}
+
+.speech-bubble:hover {
+    transform: rotate(0deg) scale(1.03);
+}
+
+.speech-bubble p {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--black);
+}
+
+.bubble-tail {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 20px solid var(--black);
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bubble-tail::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 17px solid var(--white);
+    position: absolute;
+    bottom: 5px;
+    left: -12px;
+}
+
+.hero-sub {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--black);
+    opacity: 0.7;
+}
+
+/* --- HERO BADGES --- */
+.hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.badge {
+    display: inline-block;
+    font-family: 'Bangers', cursive;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 0.3rem 0.9rem;
+    border: 3px solid var(--black);
+    border-radius: 20px;
+    box-shadow: 2px 2px 0 var(--black);
+}
+
+.badge-age { background: var(--red); color: var(--white); }
+.badge-city { background: var(--white); color: var(--black); }
+.badge-school { background: var(--green); color: var(--white); }
+
+/* --- SCROLL HINT --- */
+.scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.scroll-hint span {
+    font-size: 2rem;
+    color: var(--black);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ========================================
+   MARQUEE STRIP
+   ======================================== */
+.marquee-strip {
+    background: var(--black);
+    padding: 0.6rem 0;
+    overflow: hidden;
+    border-top: 3px solid var(--black);
+    border-bottom: 3px solid var(--black);
+}
+
+.marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-marquee 20s linear infinite;
+}
+
+.marquee-track span {
+    font-family: 'Bangers', cursive;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--yellow);
+    padding-right: 3rem;
+}
+
+@keyframes scroll-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ========================================
+   FUN FACTS STRIP
+   ======================================== */
+.fun-facts {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 2.5rem 1rem;
+    background: var(--white);
+    border-bottom: 4px solid var(--black);
+}
+
+.fact-card {
+    background: var(--yellow);
+    border: 3px solid var(--black);
+    border-radius: 12px;
+    padding: 1rem 1.8rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s;
+    cursor: default;
+    min-width: 120px;
+}
+
+.fact-card:nth-child(2) { background: var(--red); color: var(--white); }
+.fact-card:nth-child(3) { background: var(--blue); color: var(--white); }
+.fact-card:nth-child(4) { background: var(--green); color: var(--white); }
+
+.fact-card:hover {
+    transform: rotate(-3deg) scale(1.08);
+}
+
+.fact-number {
+    font-family: 'Bangers', cursive;
+    font-size: 2.5rem;
+    line-height: 1;
+    -webkit-text-stroke: 1px var(--black);
+}
+
+.fact-label {
+    font-family: 'Comic Neue', cursive;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   ABOUT / HOBBIES SECTION
+   ======================================== */
+.about-section {
+    background: var(--blue);
+    padding: 4rem 1.5rem 5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--black) 1px, transparent 1px);
+    background-size: 14px 14px;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.section-title {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    text-align: center;
+    color: var(--yellow);
+    -webkit-text-stroke: 2px var(--black);
+    text-shadow: 3px 3px 0 var(--black);
+    margin-bottom: 3rem;
+    transform: rotate(-1deg);
+}
+
+/* section doodles */
+.section-doodle {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.sd-1 { top: 8%; left: 5%; animation: twinkle 3s ease infinite; }
+.sd-2 { top: 15%; right: 8%; animation: twinkle 2.5s ease 0.5s infinite; }
+.sd-3 { bottom: 10%; left: 10%; animation: twinkle 3.5s ease 1s infinite; }
+
+/* --- PANELS GRID --- */
+.panels-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- INDIVIDUAL PANELS --- */
+.panel {
+    background: var(--white);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.panel.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.panel:hover {
+    box-shadow: 8px 8px 0 var(--black);
+}
+
+.panel-header {
+    padding: 0.8rem 1.2rem;
+    border-bottom: var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+.panel-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2));
+}
+
+.panel-header h2 {
+    font-family: 'Bangers', cursive;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    color: var(--black);
+}
+
+.panel-about .panel-header  { background: var(--yellow); }
+.panel-gaming .panel-header { background: var(--red); }
+.panel-gaming .panel-header h2 { color: var(--white); -webkit-text-stroke: 1px var(--black); }
+.panel-coding .panel-header { background: var(--green); }
+.panel-music .panel-header  { background: var(--orange); }
+.panel-basketball .panel-header { background: var(--blue); }
+.panel-basketball .panel-header h2 { color: var(--white); -webkit-text-stroke: 1px var(--black); }
+
+.panel-content {
+    padding: 1.5rem;
+}
+
+.panel-content p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--black);
+}
+
+/* panel rotations - intentionally imperfect */
+.panel-about      { transform: rotate(-0.5deg) translateY(30px); }
+.panel-gaming     { transform: rotate(0.8deg) translateY(30px); }
+.panel-coding     { transform: rotate(-0.3deg) translateY(30px); }
+.panel-music      { transform: rotate(0.6deg) translateY(30px); }
+.panel-basketball { transform: rotate(-0.4deg) translateY(30px); }
+
+.panel-about.visible      { transform: rotate(-0.5deg); }
+.panel-gaming.visible     { transform: rotate(0.8deg); }
+.panel-coding.visible     { transform: rotate(-0.3deg); }
+.panel-music.visible      { transform: rotate(0.6deg); }
+.panel-basketball.visible { transform: rotate(-0.4deg); }
+
+.panel-about:hover      { transform: rotate(0deg) scale(1.02); }
+.panel-gaming:hover     { transform: rotate(0deg) scale(1.02); }
+.panel-coding:hover     { transform: rotate(0deg) scale(1.02); }
+.panel-music:hover      { transform: rotate(0deg) scale(1.02); }
+.panel-basketball:hover { transform: rotate(0deg) scale(1.02); }
+
+/* --- ABOUT DETAILS --- */
+.about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 2px dashed var(--black);
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.detail-icon {
+    font-size: 1.3rem;
+}
+
+/* --- GAME TAGS --- */
+.game-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.game-tag {
+    background: var(--yellow);
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    padding: 0.3rem 0.8rem;
+    font-family: 'Bangers', cursive;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    box-shadow: 2px 2px 0 var(--black);
+    transition: transform 0.15s;
+}
+
+.game-tag:hover {
+    transform: scale(1.1) rotate(-3deg);
+}
+
+/* --- GAME STATUS --- */
+.game-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.5rem 0.8rem;
+    background: #f0f0f0;
+    border: 2px solid var(--black);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-dot.online {
+    background: var(--green);
+    animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* --- CODE SNIPPET (upgraded) --- */
+.code-snippet {
+    background: #1e1e1e;
+    border: 3px solid var(--black);
+    border-radius: 10px;
+    margin-top: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.code-window-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #333;
+    border-bottom: 2px solid #555;
+}
+
+.code-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.red-dot { background: #ff5f57; }
+.yellow-dot { background: #febc2e; }
+.green-dot { background: #28c840; }
+
+.code-filename {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #888;
+    margin-left: 8px;
+}
+
+.code-snippet pre {
+    margin: 0;
+    padding: 1rem;
+}
+
+.code-snippet code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    line-height: 1.6;
+}
+
+.code-kw { color: #569cd6; }
+.code-str { color: #ce9178; }
+.code-cm { color: #6a9955; }
+.code-fn { color: #dcdcaa; }
+.code-num { color: #b5cea8; }
+
+/* --- SKILL BARS --- */
+.skill-bars {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-name {
+    font-family: 'Bangers', cursive;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    min-width: 55px;
+    text-align: right;
+}
+
+.skill-bar {
+    flex: 1;
+    height: 14px;
+    background: #e0e0e0;
+    border: 2px solid var(--black);
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.skill-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 5px;
+    transition: width 1s ease;
+    position: relative;
+}
+
+.skill-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 3px,
+        rgba(255,255,255,0.2) 3px,
+        rgba(255,255,255,0.2) 6px
+    );
+}
+
+/* --- PLAYLIST BOX --- */
+.playlist-box {
+    margin-top: 1rem;
+    background: #f8f8f8;
+    border: 3px solid var(--black);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.playlist-header {
+    background: var(--red);
+    color: var(--white);
+    padding: 0.5rem 0.8rem;
+    font-family: 'Bangers', cursive;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 0.5px var(--black);
+}
+
+.playlist-item {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.15s;
+}
+
+.playlist-item:last-child {
+    border-bottom: none;
+}
+
+.playlist-item:hover {
+    background: #eee;
+}
+
+.playlist-item.active {
+    background: var(--yellow);
+}
+
+.pl-icon {
+    font-size: 0.7rem;
+    color: var(--red);
+}
+
+/* --- MUSIC NOTES --- */
+.music-notes {
+    margin-top: 1rem;
+    font-size: 2rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.note {
+    color: var(--red);
+    -webkit-text-stroke: 1px var(--black);
+    display: inline-block;
+}
+
+.n1 { animation: floatNote 2s ease-in-out infinite; }
+.n2 { animation: floatNote 2s ease-in-out 0.3s infinite; color: var(--blue); }
+.n3 { animation: floatNote 2s ease-in-out 0.6s infinite; }
+.n4 { animation: floatNote 2s ease-in-out 0.9s infinite; color: var(--green); }
+
+@keyframes floatNote {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(10deg); }
+}
+
+/* --- STATS GRID (basketball) --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.stat-box {
+    background: var(--yellow);
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    padding: 0.5rem;
+    text-align: center;
+    box-shadow: 2px 2px 0 var(--black);
+}
+
+.stat-val {
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-family: 'Comic Neue', cursive;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+/* --- BASKETBALL CSS ART --- */
+.ball-wrap {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.basketball {
+    width: 60px;
+    height: 60px;
+    background: var(--orange);
+    border: 3px solid var(--black);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 2px 2px 0 var(--black);
+    animation: dribble 1.2s ease-in-out infinite;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.basketball::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--black);
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.basketball::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -2px;
+    right: -2px;
+    height: 3px;
+    background: var(--black);
+    transform: translateY(-50%);
+}
+
+@keyframes dribble {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* ========================================
+   HIDDEN TRIVIA SECTION
+   ======================================== */
+.hidden-section {
+    display: none;
+}
+
+.hidden-section.show {
+    display: block;
+    animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.trivia-section {
+    background: var(--purple);
+    padding: 3rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.trivia-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--black) 1px, transparent 1px);
+    background-size: 14px 14px;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.trivia-box {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--white);
+    border: var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.trivia-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    background: var(--yellow);
+    padding: 0.8rem 1.2rem;
+    border-bottom: var(--border);
+}
+
+.trivia-content {
+    padding: 1.5rem;
+}
+
+.trivia-content p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.trivia-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.trivia-list li {
+    padding: 0.5rem 0;
+    border-bottom: 2px dashed #ddd;
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.trivia-list li::before {
+    content: '\\2713';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: bold;
+}
+
+.trivia-list li:last-child {
+    border-bottom: none;
+}
+
+.trivia-close {
+    display: block;
+    margin: 0 auto;
+    background: var(--yellow);
+    border: 3px solid var(--black);
+    border-radius: 12px;
+    padding: 0.6rem 1.5rem;
+    font-family: 'Bangers', cursive;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s;
+}
+
+.trivia-close:hover {
+    transform: scale(1.05);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer {
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+}
+
+.footer-stars {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.footer-stars span:nth-child(1) { color: var(--yellow); }
+.footer-stars span:nth-child(2) { color: var(--white); }
+.footer-stars span:nth-child(3) { color: var(--yellow); }
+
+.footer-main {
+    font-family: 'Comic Neue', cursive;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-sub {
+    font-family: 'Bangers', cursive;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: var(--yellow);
+    opacity: 0.8;
+}
+
+.footer-secret {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-top: 1rem;
+    cursor: pointer;
+    opacity: 0.15;
+    transition: opacity 0.3s;
+}
+
+.footer-secret:hover {
+    opacity: 0.8;
+}
+
+/* ========================================
+   CONFETTI
+   ======================================== */
+.confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    z-index: 9999;
+    pointer-events: none;
+    animation: confettiFall 1.5s ease forwards;
+}
+
+@keyframes confettiFall {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+}
+
+/* ========================================
+   MOUSE TRAIL
+   ======================================== */
+.trail-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (min-width: 600px) {
+    .panels-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .panel-about {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 900px) {
+    .panels-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .panel-about {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+    }
+
+    .fun-facts {
+        gap: 2.5rem;
+    }
+}
+
+/* ========================================
+   KONAMI EASTER EGG
+   ======================================== */
+.konami-active .panel {
+    animation: rainbowBorder 0.5s linear infinite !important;
+}
+
+.konami-active .panel.visible {
+    animation: rainbowBorder 0.5s linear infinite !important;
+}
+
+.konami-active .hero-name .name-line {
+    animation: rainbowText 0.8s linear infinite;
+}
+
+@keyframes rainbowBorder {
+    0%   { border-color: var(--red); }
+    25%  { border-color: var(--blue); }
+    50%  { border-color: var(--green); }
+    75%  { border-color: var(--yellow); }
+    100% { border-color: var(--red); }
+}
+
+@keyframes rainbowText {
+    0%   { color: var(--red); }
+    20%  { color: var(--orange); }
+    40%  { color: var(--yellow); }
+    60%  { color: var(--green); }
+    80%  { color: var(--blue); }
+    100% { color: var(--red); }
+}
+
+.konami-active .name-line:last-child {
+    animation: rainbowText2 0.8s linear infinite;
+}
+
+@keyframes rainbowText2 {
+    0%   { color: var(--blue); }
+    20%  { color: var(--green); }
+    40%  { color: var(--yellow); }
+    60%  { color: var(--orange); }
+    80%  { color: var(--red); }
+    100% { color: var(--blue); }
+}
+
+/* dark mode class */
+.dark-mode {
+    --white: #1a1a1a;
+    --black: #FAFAFA;
+    --border: 4px solid #FAFAFA;
+    --shadow: 6px 6px 0 #FAFAFA;
+    --shadow-sm: 3px 3px 0 #FAFAFA;
+}
+
+.dark-mode .hero {
+    background: #2a1a3a;
+}
+
+.dark-mode .halftone-overlay {
+    opacity: 0.08;
+}
+
+.dark-mode body {
+    background: #1a1a1a;
+    color: #FAFAFA;
+}
